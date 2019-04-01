@@ -63,9 +63,9 @@ var typeMessage = (function(velocity) {
     var index = 0
     return function(message) {
       var timerId = setTimeout(function showMessage() {
-        setTimeout(showMessage, velocity * 1000);
+        setTimeout(showMessage, velocity * 1000) ;
+        index > message.length  ? null : container.innerText = message.substring(0, index);
         index++;
-        index > message.length  ? clearTimeout(timerId) : container.innerText = message.substring(0, index);
       });
     }
 })(1)
@@ -96,27 +96,24 @@ var typeMessage = (function(velocity) {
 // свойство id экземпляра не должно измениться, так же, как и значение счетчика
 
 function User ( name ) {
-    this.name = name
-    this.id = this.counter()
-      
-    
+  this.name = name
+  this.id = this.counter()
 }
 
-User.prototype.counter = (function ( ) {
-  var counter = 1;
-  return function () {
-      return counter ++;
-  }
+User.prototype.counter = (function (){
+var id = 0
+return function(){
+  
+  return typeof this.id === 'number' ? this.id : id++
+}
 })()
 
-
 var users = [
-    new User ( "Семен" ),
-    new User ( "Антон" ),
-    new User ( "Демьян" ),
-    new User ( "Василий" )
+  new User ( "Семен" ),
+  new User ( "Антон" ),
+  new User ( "Демьян" ),
+  new User ( "Василий" )
 ]
-
 
 
 
